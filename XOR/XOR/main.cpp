@@ -26,7 +26,7 @@ int main(int argc, char** argv)
 
 	if (!validFiles)
 	{
-		printf("Usage: <file to encrypt> <key file> (optional: <output filepath>\n");
+		printf("Usage: <file to encrypt> <key file> (optional: <output filepath>)\n");
 	}
 
 	return 0;
