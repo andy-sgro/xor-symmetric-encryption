@@ -105,8 +105,7 @@ bool xorMem(char* fileBuf, char* keyBuf, int fileSize, int keyLength)
 
 		for (int i = 0; i < fileSize; ++i)
 		{
-			*pFile ^= *pKey;
-			++pFile;
+			*pFile++ ^= *pKey;
 			pKey = incMemRollover(keyBuf, pKey, keyLength);
 		}
 	}
@@ -127,9 +126,9 @@ bool xorMem(char* fileBuf, char* keyBuf, int fileSize, int keyLength)
 *
 * \return	Returns an incremented pointer.
 */
-char* incMemRollover(char* start, char* ptr, int size)
+inline char* incMemRollover(char* start, char* ptr, int size)
 {
-	return (ptr < (start + size)) ? (ptr + 1) : start;
+	return (ptr < (start + size - 1)) ? (ptr + 1) : start;
 }
 	
 
