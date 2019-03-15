@@ -1,6 +1,6 @@
 # top-most EditorConfig file
 root = true
 
-[*.{cs,js,html,c,h,php}]
+[*.{cs,js,html,c,h,php,cpp}]
 indent_style = tab
 indent_size = 4
