@@ -26,8 +26,8 @@ bool encryptFile(char* filepath, char* keyPath)
 bool encryptFile(char* filepath, char* keyPath, char* outPath)
 {
 	bool retcode = false;
-	int fileSize = 0;
-	int keyLength = 0;
+	unsigned int fileSize = 0;
+	unsigned int keyLength = 0;
 
 	char* fileBuf = fileIntoHeap(filepath, &fileSize);
 	char* keyBuf = fileIntoHeap(keyPath, &keyLength);
@@ -59,11 +59,11 @@ bool encryptFile(char* filepath, char* keyPath, char* outPath)
 *
 * \return	Returns true if all arguments are valid. Otherwise false is returned.
 */
-bool saveFile(char* srcMem, char* destPath, int size)
+bool saveFile(char* srcMem, char* destPath, unsigned int size)
 {
 	bool retcode = false;
 
-	if (srcMem && destPath && (size > 0))
+	if (srcMem && destPath && size)
 	{
 		FILE* fp = fopen(destPath, "wb");
 		if (fp)
@@ -93,7 +93,7 @@ bool saveFile(char* srcMem, char* destPath, int size)
 *
 * \return	Returns true if all arguments are valid. Otherwise false is returned.
 */
-bool xorMem(char* fileBuf, char* keyBuf, int fileSize, int keyLength)
+bool xorMem(char* fileBuf, char* keyBuf, unsigned int fileSize, unsigned int keyLength)
 {
 	bool retcode = false;
 
@@ -103,7 +103,7 @@ bool xorMem(char* fileBuf, char* keyBuf, int fileSize, int keyLength)
 		char* pFile = fileBuf;
 		char* pKey = keyBuf;
 
-		for (int i = 0; i < fileSize; ++i)
+		for (unsigned int i = 0; i < fileSize; ++i)
 		{
 			*pFile++ ^= *pKey;
 			pKey = incMemRollover(keyBuf, pKey, keyLength);
@@ -126,7 +126,7 @@ bool xorMem(char* fileBuf, char* keyBuf, int fileSize, int keyLength)
 *
 * \return	Returns an incremented pointer.
 */
-inline char* incMemRollover(char* start, char* ptr, int size)
+inline char* incMemRollover(char* start, char* ptr, unsigned int size)
 {
 	return (ptr < (start + size - 1)) ? (ptr + 1) : start;
 }
@@ -145,7 +145,7 @@ inline char* incMemRollover(char* start, char* ptr, int size)
 *
 * \return	Returns true if all arguments are valid, otherwise false is returned.
 */
-char* fileIntoHeap(char* filepath, int* size)
+char* fileIntoHeap(char* filepath, unsigned int* size)
 {
 	bool isValid = false;
 	char* fileBuffer = NULL;
@@ -158,7 +158,7 @@ char* fileIntoHeap(char* filepath, int* size)
 	}
 	else
 	{
-		int fileSize = getFileSize(fp);
+		unsigned int fileSize = getFileSize(fp);
 
 		// put filedata into heap
 		fileBuffer = (char*)malloc(fileSize);
@@ -212,7 +212,7 @@ int getFileSize(char* filepath)
 /**
 * \brief	Returns the size of the file (in bytes).
 *
-* \param	char* filepath: The file to see the size of.
+* \param	FILE* fp: The file to see the size of.
 *
 * \return	Returns the size of the file (in bytes).
 */
