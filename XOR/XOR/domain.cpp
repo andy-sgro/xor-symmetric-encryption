@@ -6,7 +6,7 @@
 * \param	char* filepath:	The file that is to be encrypted.
 * \param	char* keyPath:  The key to encrypt the file with.
 *
-* \return	Returns true if the encryption is successful, false if not.
+* \return	Returns true if the encryption is successful, false if otherwise.
 */
 bool encryptFile(char* filepath, char* keyPath)
 {
@@ -21,7 +21,7 @@ bool encryptFile(char* filepath, char* keyPath)
 * \param	char* keyPath:  The key to encrypt the file with.
 * \param	char* outPath:  The destination of the cyphertext.
 *
-* \return	Returns true if the encryption is successful, false if not.
+* \return	Returns true if the encryption is successful, false if otherwise.
 */
 bool encryptFile(char* filepath, char* keyPath, char* outPath)
 {
@@ -57,7 +57,7 @@ bool encryptFile(char* filepath, char* keyPath, char* outPath)
 * \param	char* destPath:	The destination to save the memory to.
 * \param	int size:		The size of the memory chunk to save.
 *
-* \return	Returns true if all arguments are valid, false if not.
+* \return	Returns true if all arguments are valid, false if otherwise.
 */
 bool saveFile(char* srcMem, char* destPath, unsigned int size)
 {
